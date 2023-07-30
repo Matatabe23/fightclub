@@ -20,7 +20,7 @@
 			</div>
 		</ClassicButton>
 
-		<ClassicButton @click="$router.push('/CreateNew')" v-if="isAdmin">Админ Панель</ClassicButton>
+		<ClassicButton @click="$router.push('/CreateNew')" v-if="ButtonNavBav.isAdmin">Админ Панель</ClassicButton>
 
 		<div title="Текст всплывающей подсказки" style="float: right;">
 			<ClassicButton class="dropdown">{{ user }}
