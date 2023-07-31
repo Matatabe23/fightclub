@@ -17,7 +17,7 @@ export const login = async (email, password) =>{
 
 // Функция для проверки авторизации пользователя
 export const check = async () =>{
-    const {data} = await $autHost.get('api/user/check', ) // отправляем GET-запрос на URL-адрес, защищенный авторизацией
+    const {data} = await $autHost.get('api/user/check') // отправляем GET-запрос на URL-адрес, защищенный авторизацией
     localStorage.setItem('token', data.token ) // сохраняем токен авторизации в localStorage браузера
     return jwtDecode(data.token) // декодируем токен и возвращаем его
 }

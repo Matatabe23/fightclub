@@ -2,12 +2,12 @@ import axios from 'axios'; // импортируем библиотеку axios 
 
 // создаем экземпляр axios с базовым URL http://localhost:5000/ для выполнения запросов
 const $host = axios.create({
-    baseURL: 'http://localhost:5000/' 
+    baseURL: 'http://92.53.86.217:5000/' 
 });
 
 // создаем новый экземпляр axios для выполнения запросов с авторизационным заголовком
 const $autHost = axios.create({
-    baseURL: 'http://localhost:5000/'
+    baseURL: 'http://92.53.86.217:5000/'
 });
 
 // создаем функцию для добавления авторизационного заголовка к запросу

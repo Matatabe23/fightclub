@@ -11,6 +11,7 @@
 
 <script>
 import axios from 'axios';
+import { $autHost, $host  } from "@/Http/index"; // импортируем экземпляры axios для обращения к серверу
 
 export default {
 	data() {
@@ -20,7 +21,7 @@ export default {
 		}
 	},
 	mounted() {
-		axios.get('http://localhost:5000/api/posts/receive') // здесь указывается путь к API
+		$host.get('api/posts/receive') // здесь указывается путь к API
 			.then(response => {
 				this.posts = response.data.reverse(); // здесь полученные данные помещаются в posts
 				console.log(this.posts)
