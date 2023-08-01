@@ -1,6 +1,8 @@
 <template>
 	<div class="NavBar" v-if="AuthCheck">
-		<img src="@/Image/FightClub_title.png" alt="Image alt text">
+		<a>
+			<img src="@/Image/FightClub_title.png" alt="Image alt text">
+		</a>
 		<ClassicButton @click="$router.push('/Main')">Новости</ClassicButton>
 		<ClassicButton class="dropdown">Таблицы
 			<div class="dropdown-content">

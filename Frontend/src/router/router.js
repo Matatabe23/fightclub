@@ -21,6 +21,8 @@ import Rules from '@/pages/Rules.vue'
 //Админ панель = Создать новость
 import CreateNew from '@/pages/AdminPanel/CreateNew.vue'
 
+import GiveRole from '@/pages/AdminPanel/GiveRole.vue'
+
 const routes = [
 
 	{
@@ -120,6 +122,16 @@ const routes = [
 			DEVELOPER: true
 		}
 	},
+
+	//Админ панель = выдать роль
+	{
+		path: '/GiveRole',
+		component: GiveRole,
+		meta: {
+			ADMIN: true,
+			DEVELOPER: true
+		}
+	},
 ]
 
 const router = createRouter({
@@ -153,30 +165,5 @@ router.beforeEach((to, from, next) => {
 	});
 
 });
-
-
-  // if (roles.some(role => role !== null && role !== undefined && role !== 'USER')) {
-  //   Promise.all(roles.map(role => check(token, role)))
-  //     .then(values => {
-  //       if (values.some(role => role !== null)) {
-  //         next();
-  //       } else {
-  //         alert('Запросите роль у админа');
-  //         next('/');
-  //       }
-  //     })
-  //     .catch(error => {
-  //       console.error(error);
-  //       next('/');
-  //     });
-  // } else {
-  //   next('/');
-  // }
-
-
-
-
-
-
 
 export default router;

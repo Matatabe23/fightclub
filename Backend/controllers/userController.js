@@ -58,7 +58,29 @@ class UserController {
 		return res.json({token})
 	}
 
+	async UserData(req, res) {
+		try {
+			const users = await User.findAll();
+			res.send(users);
+		} catch (error) {
+			console.error(error);
+			res.status(500).send('Server Error');
+		}
+	}
 
+	async updateRole(req, res, next) {
+		console.log(req.body)
+		const { id, newRole } = req.body; // Получаем данные из запроса
+		console.log(id)
+		try {
+			const user = await User.findOne({ where: { id } }); // Находим пользователя в базе данных по id
+			user.role = newRole; // Устанавливаем новую роль
+			await user.save(); // Сохраняем изменения в базе данных
+			return res.sendStatus(200); // Возвращаем успешный статус
+		} catch (error) {
+			return next(ApiError.internal('Не удалось обновить роль пользователя')); // Возвращаем ошибку, если не удалось сохранить изменения
+		}
+	}
 
 }
 

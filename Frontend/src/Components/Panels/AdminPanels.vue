@@ -1,7 +1,7 @@
 <template>
 	<div class="AdminPanels" >
 		<ClassicButton @click="$router.push('/CreateNew')">Создать новость</ClassicButton>
-		<ClassicButton @click="$router.push('/CreateNew')">Выдача ролей</ClassicButton>
+		<ClassicButton @click="$router.push('/GiveRole')">Выдача ролей</ClassicButton>
 	</div>
 </template>
 
