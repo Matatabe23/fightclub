@@ -35,13 +35,11 @@
 </template>
 
 <script>
-import AdminPanels from "@/Components/Panels/AdminPanels";
-import { UserData } from "@/Http/AdminAPI"
 import { $autHost, $host } from "@/Http/index"; // импортируем экземпляры axios для обращения к серверу
 
 export default {
 	components: {
-		AdminPanels,
+		
 	},
 	data() {
 		return {

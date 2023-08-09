@@ -20,7 +20,6 @@ import Rules from '@/pages/Rules.vue'
 
 //Админ панель = Создать новость
 import CreateNew from '@/pages/AdminPanel/CreateNew.vue'
-
 import GiveRole from '@/pages/AdminPanel/GiveRole.vue'
 
 const routes = [
@@ -148,6 +147,7 @@ router.beforeEach((to, from, next) => {
     next();
     return;
   }
+	
 
 	CheckDataWeb(token)
 	.then(response => {
@@ -158,9 +158,7 @@ router.beforeEach((to, from, next) => {
       next('/');
 			alert('Запросите роль у админа')
     }
-
 	}).catch(error => {
-		// Handle the error here
 		console.error(error);
 	});
 

@@ -21,14 +21,25 @@ class PostsController {
 	}
 	
 	async receive(req, res) {
-			try {
-				const posts = await Posts.findAll();
-				res.send(posts);
-			} catch (error) {
-				console.error(error);
-				res.status(500).send('Server Error');
-			}
-		}	
+		try {
+			const posts = await Posts.findAll();
+			res.send(posts);
+		} catch (error) {
+			console.error(error);
+			res.status(500).send('Server Error');
+		}
 	}
+	
+	async delete(req, res) {
+		try {
+			const { id } = req.body;
+			const post = await Posts.destroy({ where: { id }});
+			res.send('Post deleted successfully');
+		} catch (error) {
+			console.error(error);
+			res.status(500).send('Server Error');
+		}
+	}	
+}
 
-module.exports = new PostsController()
+module.exports = new PostsController();

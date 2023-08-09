@@ -2,6 +2,7 @@ const { ApiError } = require('../error/ApiError') // Импортируем кл
 const bcrypt = require('bcrypt') // Импортируем библиотеку bcrypt для хэширования паролей
 const jwt = require('jsonwebtoken') // Импортируем библиотеку jsonwebtoken для создания и проверки JWT-токенов
 const { User } = require('../models/models') // Импортируем модель User из базы данных
+const sequelize = require('../db')
 
 // Функция для генерации JWT-токена
 const generateJwt = (id, email, name, role) => {
@@ -18,7 +19,9 @@ class UserController {
 		if (!email || !password) { // Если email или пароль не введены, возвращаем ошибку
 			return next(ApiError.badRequest('Некорректный email или пароль'))
 		}
-		const candidate = await User.findOne({ where: { email } }) // Проверяем, что пользователь с таким email еще не зарегистрирован
+		const candidate = await User.findOne({ 
+			where: sequelize.where(sequelize.fn('lower', sequelize.col('email')), email.toLowerCase()) 
+		})		 // Проверяем, что пользователь с таким email еще не зарегистрирован
 		if (candidate) { // Если пользователь уже существует, возвращаем ошибку
 			return next(ApiError.badRequest('Пользователь с таким email уже существует'))
 		}

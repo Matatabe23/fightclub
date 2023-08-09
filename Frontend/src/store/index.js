@@ -1,8 +1,8 @@
 import { createStore } from "vuex";
-import { AuthModul } from "@/store/AuthModul";
+import { NavBarModul } from "@/store/NavBarModul";
 
 export default createStore({
 	modules: {
-		auth: AuthModul
+		navbar: NavBarModul
 	}
 })

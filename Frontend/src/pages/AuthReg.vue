@@ -1,62 +1,82 @@
 <template>
-  <div>
-    <div class="auth-container">
-      <img src="@/Image/FightClub_title.png" alt="Image alt text">
-      
-      <div v-if="islogin" class="auth">
-        <h2>Авторизация</h2>
-        <input v-model="auth.email" type="text" placeholder="Email">
-        <input v-model="auth.password" type="password" placeholder="Пароль">
-        <button class="enter" @click="login">Войти</button>
-        <button class="reg" @click="islogin = false">Регистрация</button>
-      </div>
-      
-      <div v-if="!islogin" class="auth">
-        <h2>Регистрация</h2>
-        <input v-model="RegUser.email" type="text" placeholder="Email">
-        <input v-model="RegUser.name" type="text" placeholder="Логин">
-        <input v-model="RegUser.password" type="password" placeholder="Пароль">
-        <input v-model="confirmPassword" type="password" placeholder="Повторение пароля">
-        <button class="enter" @click="Registration">Зарегистрироваться</button>
-        <button class="reg" @click="islogin = true">Авторизация</button>
-      </div>
-    </div>
-  </div>
+	<div>
+		<div class="auth-container">
+			<img src="@/Image/FightClub_title.png" alt="Image alt text">
+
+			<div v-if="islogin" class="auth">
+				<h2>Авторизация</h2>
+				<input v-model="auth.email" type="text" placeholder="Email" @keydown.enter="loginOnEnter">
+				<input v-model="auth.password" type="password" placeholder="Пароль" @keydown.enter="loginOnEnter">
+				<button id="login" class="enter" @click="login">Войти</button>
+				<button class="reg" @click="islogin = false">Регистрация</button>
+			</div>
+
+			<div v-if="!islogin" class="auth">
+				<h2>Регистрация</h2>
+				<input v-model="RegUser.email" type="text" placeholder="Email" @keydown.enter="registerOnEnter">
+				<input v-model="RegUser.name" type="text" placeholder="Логин" @keydown.enter="registerOnEnter">
+				<input v-model="RegUser.password" type="password" placeholder="Пароль" @keydown.enter="registerOnEnter">
+				<input v-model="confirmPassword" type="password" placeholder="Повторение пароля" @keydown.enter="registerOnEnter">
+				<button id="registration" class="enter" @click="Registration">Зарегистрироваться</button>
+				<button class="reg" @click="islogin = true">Авторизация</button>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>
 import { login, registration } from '@/Http/UserAPI'
 
 export default {
-  data() {
-    return {
-      islogin: true,
-      auth: {
-        email: "",
-        password: ""
-      },
-      RegUser: {
-        email: "",
-        name: "",
-        password: "",
-      },
-      confirmPassword: "",
-    }
-  },
-  methods: {
+	data() {
+		return {
+			islogin: true,
+			auth: {
+				email: "",
+				password: ""
+			},
+			RegUser: {
+				email: "",
+				name: "",
+				password: "",
+			},
+			confirmPassword: "",
+		}
+	},
+	methods: {
+		loginOnEnter(event) {
+			if (event.keyCode === 13) {
+				this.login();
+			}
+		},
+		registerOnEnter(event) {
+			if (event.keyCode === 13) {
+				this.Registration();
+			}
+		},
 		login() {
 			const { email, password } = this.auth;
 			const emailTrimmed = email.trim();
 			const passwordTrimmed = password.trim();
-			//Поля пустые?
+
 			if (!emailTrimmed || !passwordTrimmed) {
 				alert("Заполните все поля!");
 				return;
 			}
 
-			// Отправляем информацию в login который находиться в UserAPI
-			const result = login(email, password);
+			const emailLowercased = emailTrimmed.toLowerCase();
+
+			const result = login(emailLowercased, password);
 			result.then(response => {
+				this.$store.commit("SET_USER_DATA", response);
+				// и обновляем доступы кнопок
+				this.showSummaryButton = this.$store.getters.showSummaryButton;
+				this.showAttendanceButton = this.$store.getters.showAttendanceButton;
+				this.showDropButton = this.$store.getters.showDropButton;
+				this.showQueueButton = this.$store.getters.showQueueButton;
+				this.showAdminPanelButton = this.$store.getters.showAdminPanelButton;
+
+				
 				this.$router.push('/Main');
 			}).catch(error => {
 				console.error(error);
@@ -92,10 +112,14 @@ export default {
 				console.error(error);
 				alert('Ошибка!');
 			});
+		},
+		UpdateButton(){
+			
 		}
 	}
 }
 </script>
+
 
 <style scoped>
 .auth-container {

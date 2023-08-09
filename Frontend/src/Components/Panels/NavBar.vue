@@ -7,10 +7,10 @@
 		<ClassicButton class="dropdown">Таблицы
 			<div class="dropdown-content">
 				<DropButton @click="$router.push('/Everyone')">Участники</DropButton>
-				<DropButton @click="$router.push('/Summary')">Сводка</DropButton>
-				<DropButton @click="$router.push('/Attendance')">Посещаемость и зп</DropButton>
-				<DropButton @click="$router.push('/Drop')">Дроп</DropButton>
-				<DropButton @click="$router.push('/Queue')">Очередь на дроп</DropButton>
+				<DropButton @click="$router.push('/Summary')" v-if="showSummaryButton">Сводка</DropButton>
+				<DropButton @click="$router.push('/Attendance')" v-if="showAttendanceButton">Посещаемость и зп</DropButton>
+				<DropButton @click="$router.push('/Drop')" v-if="showDropButton">Дроп</DropButton>
+				<DropButton @click="$router.push('/Queue')" v-if="showQueueButton">Очередь на дроп</DropButton>
 			</div>
 		</ClassicButton>
 		<ClassicButton @click="$router.push('/Rules')">Правила</ClassicButton>
@@ -22,7 +22,7 @@
 			</div>
 		</ClassicButton>
 
-		<ClassicButton @click="$router.push('/CreateNew')" v-if="ButtonNavBav.isAdmin">Админ Панель</ClassicButton>
+		<ClassicButton @click="$router.push('/CreateNew')" v-if="showAdminPanelButton">Админ Панель</ClassicButton>
 
 		<div title="Текст всплывающей подсказки" style="float: right;">
 			<ClassicButton class="dropdown">{{ user }}
@@ -34,46 +34,60 @@
 	</div>
 </template>
 
+
+
+
 <script>
-import { check } from '@/Http/UserAPI'
+import { mapGetters } from 'vuex';
+import { check } from '@/Http/UserAPI';
 
 export default {
-	data() {
-		return {
-			ButtonNavBav: {
-				isAdmin: true,
-				isOfficer: true,
-				isFightClub: true,
-				isIntern: true,
-			},
-			user: '',
+	name: 'NavBar',
+	data(){
+		return{
+			isPageRefreshed: false
 		}
 	},
 	computed: {
 		AuthCheck() {
 			return this.$route.path !== '/';
 		},
+		...mapGetters({
+			showSummaryButton: 'showSummaryButton',
+			showAttendanceButton: 'showAttendanceButton',
+			showDropButton: 'showDropButton',
+			showQueueButton: 'showQueueButton',
+			showAdminPanelButton: 'showAdminPanelButton',
+		}),
+	},
+	data() {
+		return {
+			user: '',
+		};
 	},
 	mounted() {
-		const token = localStorage.getItem("token");
+
+		const token = localStorage.getItem('token');
 		if (token) {
 			check(token).then((Name) => {
 				this.user = Name.name;
+				this.$store.commit('SET_USER_DATA', Name);
 			});
 		}
-	},
-	created() {
-
 	},
 	methods: {
 		Exit() {
 			this.$router.push('/');
-			alert('вы успешно вышли из аккаунта')
 			localStorage.removeItem('token');
-		}
-	}
-}
+			this.$store.commit('SET_USER_DATA', null);
+		},
+	},
+
+};
 </script>
+
+
+
 
 <style>
 .NavBar {
@@ -87,8 +101,6 @@ export default {
 	width: 50vh;
 }
 
-
-
 .dropdown-content {
 	position: absolute;
 	display: none;
@@ -100,7 +112,6 @@ export default {
 	background-color: black;
 	border-radius: 15px;
 }
-
 
 .dropdown:hover .dropdown-content {
 	display: block;

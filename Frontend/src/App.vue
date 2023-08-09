@@ -1,18 +1,14 @@
 <template>
 	<div class="app" @keydown="myFunction">
-		<NavBar></NavBar>
-		<router-view></router-view>
+		<TheLoadingComponent/>
+		<NavBar/>
+		<router-view/>
 	</div>
 </template>
 
 <script>
-import NavBar from '@/Components/Panels/NavBar'
-import { TokenUpdate } from './Http/UserAPI';
-
 export default {
-	components: {
-		NavBar,
-	},
+
 }
 </script>
 
