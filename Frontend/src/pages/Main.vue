@@ -1,17 +1,22 @@
 <template>
 	<div class="Main">
-		<PostList :posts="posts"/>
+		<MySelect v-model="selectedSort" :options="sortOptions" />
+		<PostList :posts="selectedPosts" />
 	</div>
 </template>
 
 <script>
-import { $autHost, $host  } from "@/Http/index"; // импортируем экземпляры axios для обращения к серверу
+import { $autHost, $host } from "@/Http/index"; // импортируем экземпляры axios для обращения к серверу
 
 export default {
 	data() {
 		return {
 			posts: [],
-			formattedPosts: []
+			selectedSort: '',
+			sortOptions: [
+				{ value: 'title', name: 'По названию' },
+				{ value: 'body', name: 'По описанию' }
+			],
 		}
 	},
 	mounted() {
@@ -24,9 +29,13 @@ export default {
 				console.log(error);
 			})
 	},
+	
+	computed: {
+		selectedPosts() {
+			return [...this.posts].sort((post1, post2) => post1[this.selectedSort]?.localeCompare(post2[this.selectedSort]))
+		}
+	},
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

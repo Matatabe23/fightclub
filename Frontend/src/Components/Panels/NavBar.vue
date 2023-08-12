@@ -45,7 +45,8 @@ export default {
 	name: 'NavBar',
 	data(){
 		return{
-			isPageRefreshed: false
+			isPageRefreshed: false,
+			user: '',
 		}
 	},
 	computed: {
@@ -60,13 +61,7 @@ export default {
 			showAdminPanelButton: 'showAdminPanelButton',
 		}),
 	},
-	data() {
-		return {
-			user: '',
-		};
-	},
 	mounted() {
-
 		const token = localStorage.getItem('token');
 		if (token) {
 			check(token).then((Name) => {

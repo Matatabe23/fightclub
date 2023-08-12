@@ -2,8 +2,9 @@
 	<AdminPanels></AdminPanels>
 	<div class="CreateNew">
 		<PostForm :post="post" @CreatePosts="createPost" />
+		<MySelect v-model="selectedSort" :options="sortOptions" />
 		<h1 style="text-align: center;">список новостей</h1>
-		<PostList :posts="posts" @onDeletePost="deletePost" />
+		<PostList :posts="selectedPosts" @onDeletePost="deletePost" />
 	</div>
 </template>
 
@@ -24,6 +25,11 @@ export default {
 				ADnameRole: "",
 			},
 			posts: [],
+			selectedSort: '',
+			sortOptions: [
+				{ value: 'title', name: 'По названию' },
+				{ value: 'body', name: 'По описанию' }
+			],
 		};
 	},
 	mounted() {
@@ -31,12 +37,13 @@ export default {
 		Receive()
 			.then(response => {
 				console.log(response)
-				this.posts = response;
+				this.posts = response.reverse();
 			})
 			.catch(error => {
 				console.log(error);
 			})
 	},
+
 	created() {
 		const AdminName = localStorage.getItem('token')
 		check(AdminName)
@@ -45,20 +52,34 @@ export default {
 					this.post.ADnameRole = AdminName.role
 			})
 	},
+
 	methods: {
 		// Создание поста
 		createPost(post) {
+			if (!post.title || !post.body) { 
+				alert('Пожалуйста, заполните обязательные поля: Название и Описание');
+				return;
+			}
 			Posts(post)
 				.then(() => {
 					this.post.title = "";
 					this.post.body = "";
 					this.post.ADname = "";
-					location.reload();
+					Receive()
+						.then(response => {
+							console.log(response)
+							this.posts = response.reverse();
+						})
+						.catch(error => {
+							console.log(error);
+						});
 				})
 				.catch((err) => console.log(err));
 		},
+
+
 		//Удаление поста
-		async deletePost(postId) {
+		deletePost(postId) {
 			const confirmation = confirm("Вы уверены, что хотите удалить этот пост?");
 			if (!confirmation) {
 				return;
@@ -70,11 +91,20 @@ export default {
 				}
 			})
 				.then(response => {
-					location.reload();
+					// Удаление поста из массива posts
+					const index = this.posts.findIndex(post => post.id === postId);
+					this.posts.splice(index, 1);
 				})
 				.catch(error => {
 					console.log(error);
 				})
+		},
+	},
+
+
+	computed: {
+		selectedPosts() {
+			return [...this.posts].sort((post1, post2) => post1[this.selectedSort]?.localeCompare(post2[this.selectedSort]))
 		}
 	}
 }

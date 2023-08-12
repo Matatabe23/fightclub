@@ -39,7 +39,7 @@ import { $autHost, $host } from "@/Http/index"; // импортируем экз
 
 export default {
 	components: {
-		
+
 	},
 	data() {
 		return {
@@ -48,7 +48,7 @@ export default {
 				id: '',
 				newRole: ''
 			},
-			roles: ['ADMIN', 'OFFICER', 'FIGHTCLUB', 'INTERN', 'USER']
+			roles: ['ADMIN', 'OFFICER', 'FIGHTCLUB', 'INTERN', 'USER'],
 		}
 	},
 	mounted() {
@@ -65,18 +65,24 @@ export default {
 		UPRole() {
 			const token = localStorage.getItem('token');
 			const update = this.GiveRole;
+			// Check if the new role exists in the roles array
+			if (!this.roles.includes(update.newRole)) {
+				alert('Выберите роль')
+				return;
+			}
 			$autHost.post('api/user/updateRole', update, {
 				headers: {
 					Authorization: 'Bearer ' + token
 				}
 			})
 				.then(response => {
-					location.reload(); // отсортировать по ID от меньшего к большему
+					location.reload();
 				})
 				.catch(error => {
 					console.log(error);
 				})
 		}
+
 
 	}
 
@@ -109,13 +115,13 @@ export default {
 	width: 100vh;
 	margin: auto;
 	margin-bottom: 15px;
-  font-size: 16px;
-  padding: 10px;
-  border: 1px solid gray;
-  border-radius: 5px;
-  background-color: white;
-  cursor: pointer;
-  appearance: none;
+	font-size: 16px;
+	padding: 10px;
+	border: 1px solid gray;
+	border-radius: 5px;
+	background-color: white;
+	cursor: pointer;
+	appearance: none;
 	text-align: center;
 }
 
