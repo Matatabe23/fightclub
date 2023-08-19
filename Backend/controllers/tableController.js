@@ -7,7 +7,7 @@ class tableController {
 	async Receiving(req, res) {
 		try {
 			const spreadsheetId = '18aRH-CBmO6Qot2gw-bIBRud_-kbX-PcIgkFe8W8zNsg';
-			const sheetName = 'List1!A:HM';
+			const sheetName = 'List1';
 			const auth = new google.auth.GoogleAuth({
 				keyFile: './other/keyfile.json',
 				scopes: ['https://www.googleapis.com/auth/spreadsheets']
@@ -19,6 +19,7 @@ class tableController {
 			}, (err, response) => {
 				if (err) return console.log(`The API returned an error: ${err}`);
 				const rows = response.data.values;
+				console.log(rows)
 				res.send(rows);
 			});
 		} catch (error) {
