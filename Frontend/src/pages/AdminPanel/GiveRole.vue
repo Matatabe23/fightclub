@@ -1,14 +1,6 @@
 <template>
 	<AdminPanels></AdminPanels>
-	<div class="RiveRole">
-		<div class="Giverol">
-			<h1>изменить роль</h1>
-			<input v-model="GiveRole.id" type="text" placeholder="id пользователя которому надо изменить роль" />
-			<select v-model="GiveRole.newRole">
-				<option v-for="role in roles" :value="role">{{ role }}</option>
-			</select>
-			<button @click="UPRole">Изменить</button>
-		</div>
+		<RoleForm :GiveRole="GiveRole" @OnUPRole="UPRole"/>
 		<table class="table">
 			<thead>
 				<tr>
@@ -31,7 +23,6 @@
 				</tr>
 			</tbody>
 		</table>
-	</div>
 </template>
 
 <script>
@@ -46,9 +37,9 @@ export default {
 			users: [],
 			GiveRole: {
 				id: '',
-				newRole: ''
+				newRole: '',
+				roles: ['ADMIN', 'OFFICER', 'FIGHTCLUB', 'INTERN', 'USER']
 			},
-			roles: ['ADMIN', 'OFFICER', 'FIGHTCLUB', 'INTERN', 'USER'],
 		}
 	},
 	mounted() {
@@ -65,8 +56,8 @@ export default {
 		UPRole() {
 			const token = localStorage.getItem('token');
 			const update = this.GiveRole;
-			// Check if the new role exists in the roles array
-			if (!this.roles.includes(update.newRole)) {
+
+			if (!this.GiveRole.roles.includes(update.newRole)) {
 				alert('Выберите роль')
 				return;
 			}
@@ -90,50 +81,6 @@ export default {
 </script>
 
 <style scoped>
-.Giverol {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-
-}
-
-.Giverol h1 {
-	text-align: center;
-	margin-bottom: 15px;
-}
-
-.Giverol input {
-	padding: 20px;
-	width: 100vh;
-	text-align: center;
-	font-size: 20px;
-	margin: auto;
-	margin-bottom: 15px;
-}
-
-.Giverol select {
-	width: 100vh;
-	margin: auto;
-	margin-bottom: 15px;
-	font-size: 16px;
-	padding: 10px;
-	border: 1px solid gray;
-	border-radius: 5px;
-	background-color: white;
-	cursor: pointer;
-	appearance: none;
-	text-align: center;
-}
-
-
-.Giverol button {
-	padding: 20px;
-	width: 100vh;
-	font-size: 20px;
-	margin: auto;
-	margin-bottom: 15px;
-}
-
 .table {
 	width: 100%;
 	max-width: 900px;

@@ -18,7 +18,7 @@ export default {
       // Эмулируем задержку загрузки данных
       setTimeout(() => {
         this.isLoading = false;
-      }, 200);
+      }, 1000);
     }
   }
 };

@@ -6,14 +6,14 @@
 		<ClassicButton @click="$router.push('/Main')">Новости</ClassicButton>
 		<ClassicButton class="dropdown">Таблицы
 			<div class="dropdown-content">
-				<DropButton @click="$router.push('/Everyone')">Участники</DropButton>
-				<DropButton @click="$router.push('/Summary')" v-if="showSummaryButton">Сводка</DropButton>
-				<DropButton @click="$router.push('/Attendance')" v-if="showAttendanceButton">Посещаемость и зп</DropButton>
-				<DropButton @click="$router.push('/Drop')" v-if="showDropButton">Дроп</DropButton>
-				<DropButton @click="$router.push('/Queue')" v-if="showQueueButton">Очередь на дроп</DropButton>
+				<DropButton @click="$router.push('/Everyone')">Посещаемость</DropButton>
+				<DropButton @click="$router.push('/Test')" v-if="showSummaryButton">Test</DropButton>
+				<DropButton @click="$router.push('/Main')" v-if="showAttendanceButton">***</DropButton>
+				<DropButton @click="$router.push('/Main')" v-if="showDropButton">***</DropButton>
+				<DropButton @click="$router.push('/Main')" v-if="showQueueButton">***</DropButton>
 			</div>
 		</ClassicButton>
-		<ClassicButton @click="$router.push('/Rules')">Правила</ClassicButton>
+		<ClassicButton @click="$router.push('/Main')">Правила</ClassicButton>
 		<ClassicButton class="dropdown">Информация
 			<div class="dropdown-content">
 				<DropButton>Дискорд</DropButton>
@@ -70,6 +70,7 @@ export default {
 			});
 		}
 	},
+	
 	methods: {
 		Exit() {
 			this.$router.push('/');

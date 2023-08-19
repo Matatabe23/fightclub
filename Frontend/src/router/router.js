@@ -4,26 +4,18 @@ import { check, CheckDataWeb } from '@/Http/UserAPI'
 
 import AuthReg from '@/pages/AuthReg.vue'
 
-
 //Главная
 import Main from '@/pages/Main.vue'
 
 //Таблицы
 import Everyone from '@/pages/Table/Everyone.vue'
-import Summary from '@/pages/Table/Summary.vue'
-import Attendance from '@/pages/Table/Attendance.vue'
-import Drop from '@/pages/Table/Drop.vue'
-import Queue from '@/pages/Table/Queue.vue'
-
-//Правила
-import Rules from '@/pages/Rules.vue'
+import Test from '@/pages/Table/Test.vue'
 
 //Админ панель = Создать новость
 import CreateNew from '@/pages/AdminPanel/CreateNew.vue'
 import GiveRole from '@/pages/AdminPanel/GiveRole.vue'
 
 const routes = [
-
 	{
 		path: '/',
 		component: AuthReg,
@@ -54,55 +46,10 @@ const routes = [
 			ADMIN: true
 		}
 	},
-	//Сводка
-	{
-		path: '/Summary',
-		component: Summary,
-		meta: {
-			FIGHTCLUB: true,
-			OFFICER: true,
-			DEVELOPER: true,
-			ADMIN: true
-		}
-	},
-	//Посещаемость и зп
-	{
-		path: '/Attendance',
-		component: Attendance,
-		meta: {
-			FIGHTCLUB: true,
-			OFFICER: true,
-			DEVELOPER: true,
-			ADMIN: true
-		}
-	},
-	//Дроп
-	{
-		path: '/Drop',
-		component: Drop,
-		meta: {
-			FIGHTCLUB: true,
-			OFFICER: true,
-			DEVELOPER: true,
-			ADMIN: true
-		}
-	},
-	//Очередь на дроп
-	{
-		path: '/Queue',
-		component: Queue,
-		meta: {
-			FIGHTCLUB: true,
-			OFFICER: true,
-			DEVELOPER: true,
-			ADMIN: true
-		}
-	},
 
-	//Правила
 	{
-		path: '/Rules',
-		component: Rules,
+		path: '/Test',
+		component: Test,
 		meta: {
 			INTERN: true,
 			FIGHTCLUB: true,
@@ -111,7 +58,7 @@ const routes = [
 			ADMIN: true
 		}
 	},
-
+	
 	//Админ панель = Создать новость
 	{
 		path: '/CreateNew',

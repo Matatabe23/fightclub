@@ -113,9 +113,6 @@ export default {
 				alert('Ошибка!');
 			});
 		},
-		UpdateButton(){
-			
-		}
 	}
 }
 </script>
@@ -162,6 +159,7 @@ export default {
 	border: none;
 	color: white;
 	font-size: 18px;
+	border-radius: 15px;
 }
 
 .auth-container input[type="text"]::placeholder,
@@ -180,6 +178,7 @@ export default {
 	width: 100%;
 	padding: 10px 15px;
 	cursor: pointer;
+	border-radius: 15px;
 }
 
 .enter {

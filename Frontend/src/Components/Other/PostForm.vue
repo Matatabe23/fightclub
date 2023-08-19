@@ -38,6 +38,7 @@ export default {
 	margin: 10px 0;
 	text-align: center;
 	font-size: 20px;
+	border-radius: 15px;
 }
 
 .post input::placeholder {
@@ -52,5 +53,6 @@ export default {
 	font-size: 20px;
 	margin-top: 10px;
 	margin-bottom: 15px;
+	border-radius: 15px;
 }
 </style>
