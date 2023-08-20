@@ -1,13 +1,12 @@
 <template>
-	<div class="NavBar" v-if="AuthCheck">
+	<div class="NavBar" v-show="AuthCheck">
 		<a>
 			<img src="@/Image/FightClub_title.png" alt="Image alt text">
 		</a>
 		<ClassicButton @click="$router.push('/Main')">Новости</ClassicButton>
 		<ClassicButton class="dropdown">Таблицы
 			<div class="dropdown-content">
-				<DropButton @click="$router.push('/Everyone')">Посещаемость</DropButton>
-				<DropButton @click="$router.push('/Test')" v-if="showSummaryButton">Test</DropButton>
+				<DropButton @click="$router.push('/interpreter')" v-if="showSummaryButton">Посещаемость</DropButton>
 				<DropButton @click="$router.push('/Main')" v-if="showAttendanceButton">***</DropButton>
 				<DropButton @click="$router.push('/Main')" v-if="showDropButton">***</DropButton>
 				<DropButton @click="$router.push('/Main')" v-if="showQueueButton">***</DropButton>

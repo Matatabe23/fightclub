@@ -4,7 +4,7 @@ const { json } = require('body-parser');
 const { google } = require('googleapis'); // Подключение модуля googleapis, содержащего Google API-клиент
 
 class tableController {
-	async Receiving(req, res) {
+	async interpreter(req, res) {
 		try {
 			const spreadsheetId = '18aRH-CBmO6Qot2gw-bIBRud_-kbX-PcIgkFe8W8zNsg';
 			const sheetName = 'List1';

@@ -8,8 +8,7 @@ import AuthReg from '@/pages/AuthReg.vue'
 import Main from '@/pages/Main.vue'
 
 //Таблицы
-import Everyone from '@/pages/Table/Everyone.vue'
-import Test from '@/pages/Table/Test.vue'
+import interpreter from '@/pages/Table/interpreter.vue'
 
 //Админ панель = Создать новость
 import CreateNew from '@/pages/AdminPanel/CreateNew.vue'
@@ -33,23 +32,11 @@ const routes = [
 			ADMIN: true
 		}
 	},
-
-	//Участники
+	
+	// Посещаемость
 	{
-		path: '/Everyone',
-		component: Everyone,
-		meta: {
-			INTERN: true,
-			FIGHTCLUB: true,
-			OFFICER: true,
-			DEVELOPER: true,
-			ADMIN: true
-		}
-	},
-
-	{
-		path: '/Test',
-		component: Test,
+		path: '/interpreter',
+		component: interpreter,
 		meta: {
 			INTERN: true,
 			FIGHTCLUB: true,

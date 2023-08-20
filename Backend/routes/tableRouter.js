@@ -3,6 +3,6 @@ const router = new Router()
 const checkRole = require('../middleware/checkRoleMiddleware')
 const tableController = require('../controllers/tableController')
 
-router.get('/Receiving', checkRole(['ADMIN', 'DEVELOPER']), tableController.Receiving )
+router.get('/interpreter', checkRole(['ADMIN', 'DEVELOPER']), tableController.interpreter )
 
 module.exports = router
