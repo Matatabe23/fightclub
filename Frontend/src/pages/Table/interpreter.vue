@@ -39,7 +39,6 @@ export default {
       .then(response => {
         this.rows = response.data.slice(3);
         this.deta = response.data[1];
-        console.log(this.deta);
       })
       .catch(error => {
         console.log(error);
@@ -56,17 +55,18 @@ export default {
 
 .comand {
   font-size: 15px;
-  margin-top: 20px;
   text-align: center;
   word-wrap: break-word;
   overflow-x: auto; 
+  margin: 30px 100px 0 100px;
 }
 
 .table {
   display: table;
   color: white;
   table-layout: fixed;
-	border-collapse: collapse;
+  border-collapse: collapse;
+  margin-bottom: 50px;
 }
 
 .row {
@@ -88,8 +88,26 @@ export default {
   border: none;
   padding: 5px;
 }
-.data-cell:nth-child(n):nth-child(7n) {
-  border-right: 4px solid black;
+
+.data-cell:nth-child(2) {
+  position: sticky;
+  left: 0;
 }
+
+.data-cell:nth-child(n):nth-child(7n),
+.cell:nth-child(n):nth-child(7n) {
+  border-right: 4px solid red;
+}
+
+.caption td:nth-child(-n+2) {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+	background-color: #663192;
+}
+.caption td.none-cell {
+  background-color: transparent;
+}
+
 
 </style>

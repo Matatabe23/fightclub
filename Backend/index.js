@@ -17,6 +17,7 @@ app.use(cors()) // Используем middleware для обработки COR
 app.use(express.json()) // Парсим JSON-данные при запросе
 app.use('/api', router) // Используем маршрутизатор
 
+
 const start = async() =>{
 	try{
 		await sequelize.authenticate() // Аутентификация в базе данных
