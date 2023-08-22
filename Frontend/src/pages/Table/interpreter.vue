@@ -6,8 +6,10 @@
     <div class="comand">
       <table class="table">
         <tr class="row caption">
-          <td class="none-cell" v-for="row in 4"></td>
+					<td class="none-cell" style="border-left: 4px solid black;"></td>
+          <td class="none-cell" v-for="row in 3"></td>
           <td class="data-cell" v-for="(cell) in deta" :key="cell">{{ cell }}</td>
+					<td class="data-cell" style="border-right: 4px solid black;"></td>
         </tr>
 
         <tr class="row caption" v-for="row in rows" :key="row">
@@ -86,9 +88,12 @@ export default {
 .none-cell {
   display: table-cell;
   border: none;
+	border-top: 4px solid black;
   padding: 5px;
 }
-
+.data-cell{
+	border-top: 4px solid black;
+}
 .data-cell:nth-child(2) {
   position: sticky;
   left: 0;
@@ -105,9 +110,8 @@ export default {
   z-index: 1;
 	background-color: #663192;
 }
+
 .caption td.none-cell {
   background-color: transparent;
 }
-
-
 </style>

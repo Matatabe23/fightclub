@@ -82,7 +82,6 @@ router.beforeEach((to, from, next) => {
     return;
   }
 	
-
 	CheckDataWeb(token)
 	.then(response => {
 		const userData = response;
@@ -95,7 +94,6 @@ router.beforeEach((to, from, next) => {
 	}).catch(error => {
 		console.error(error);
 	});
-
 });
 
 export default router;
