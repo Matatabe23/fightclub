@@ -19,7 +19,6 @@ class tableController {
 			}, (err, response) => {
 				if (err) return console.log(`The API returned an error: ${err}`);
 				const rows = response.data.values;
-				console.log(rows)
 				res.send(rows);
 			});
 		} catch (error) {

@@ -84,7 +84,7 @@ export default {
 
 
 
-<style>
+<style scoped>
 .NavBar {
 	display: flex;
 	justify-content: space-between;

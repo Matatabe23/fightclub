@@ -10,7 +10,7 @@ export default{
 }
 </script>
 
-<style>
+<style scoped>
 .bottom-panel {
 	position: fixed;
 	bottom: 0;

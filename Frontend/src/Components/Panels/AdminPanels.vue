@@ -11,7 +11,7 @@ export default{
 }
 </script>
 
-<style>
+<style scoped>
 .AdminPanels {
 	display: flex;
 	justify-content: space-between;

@@ -74,7 +74,6 @@ class UserController {
 	async updateRole(req, res, next) {
 		console.log(req.body)
 		const { id, newRole } = req.body; // Получаем данные из запроса
-		console.log(id)
 		try {
 			const user = await User.findOne({ where: { id } }); // Находим пользователя в базе данных по id
 			user.role = newRole; // Устанавливаем новую роль
