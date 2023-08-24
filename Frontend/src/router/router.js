@@ -9,6 +9,7 @@ import Main from '@/pages/Main.vue'
 
 //Таблицы
 import interpreter from '@/pages/Table/interpreter.vue'
+import Drop from '@/pages/Table/Drop.vue'
 
 //Админ панель = Создать новость
 import CreateNew from '@/pages/AdminPanel/CreateNew.vue'
@@ -45,6 +46,19 @@ const routes = [
 			ADMIN: true
 		}
 	},
+
+		// Дроп
+		{
+			path: '/Drop',
+			component: Drop,
+			meta: {
+				INTERN: true,
+				FIGHTCLUB: true,
+				OFFICER: true,
+				DEVELOPER: true,
+				ADMIN: true
+			}
+		},
 	
 	//Админ панель = Создать новость
 	{

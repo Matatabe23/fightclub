@@ -11,28 +11,14 @@ export const NavBarModul = ({
   },
   getters: {
     //таблицы
-    showSummaryButton: (state) => {
+    Showinterpreter: (state) => {
       if (state.userData && ['ADMIN', 'DEVELOPER', 'OFFICER', 'FIGHTCLUB'].includes(state.userData.role)) {
         return true;
       } else {
         return false;
       }
     },
-    showAttendanceButton: (state) => {
-      if (state.userData && ['ADMIN', 'DEVELOPER', 'OFFICER', 'FIGHTCLUB'].includes(state.userData.role)) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    showDropButton: (state) => {
-      if (state.userData && ['ADMIN', 'DEVELOPER', 'OFFICER', 'FIGHTCLUB'].includes(state.userData.role)) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    showQueueButton: (state, to) => {
+    showDrop: (state) => {
       if (state.userData && ['ADMIN', 'DEVELOPER', 'OFFICER', 'FIGHTCLUB'].includes(state.userData.role)) {
         return true;
       } else {

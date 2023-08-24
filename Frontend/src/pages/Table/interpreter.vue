@@ -33,7 +33,7 @@ export default {
   created() {
     const token = localStorage.getItem('token');
     $autHost
-      .get('api/table/interpreter', {
+      .get('api/table/Interpreter', {
         headers: {
           Authorization: 'Bearer ' + token
         }

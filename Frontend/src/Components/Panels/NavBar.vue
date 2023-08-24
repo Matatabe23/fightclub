@@ -6,10 +6,10 @@
 		<ClassicButton @click="$router.push('/Main')">Новости</ClassicButton>
 		<ClassicButton class="dropdown">Таблицы
 			<div class="dropdown-content">
-				<DropButton @click="$router.push('/interpreter')" v-if="showSummaryButton">Посещаемость</DropButton>
-				<DropButton @click="$router.push('/Main')" v-if="showAttendanceButton">***</DropButton>
-				<DropButton @click="$router.push('/Main')" v-if="showDropButton">***</DropButton>
-				<DropButton @click="$router.push('/Main')" v-if="showQueueButton">***</DropButton>
+				<DropButton @click="$router.push('/interpreter')" v-if="Showinterpreter">Посещаемость</DropButton>
+				<DropButton @click="$router.push('/Drop')" v-if="showDrop">Дроп</DropButton>
+				<DropButton @click="$router.push('/Main')">***</DropButton>
+				<DropButton @click="$router.push('/Main')">***</DropButton>
 			</div>
 		</ClassicButton>
 		<ClassicButton @click="$router.push('/Main')">Правила</ClassicButton>
@@ -53,10 +53,8 @@ export default {
 			return this.$route.path !== '/';
 		},
 		...mapGetters({
-			showSummaryButton: 'showSummaryButton',
-			showAttendanceButton: 'showAttendanceButton',
-			showDropButton: 'showDropButton',
-			showQueueButton: 'showQueueButton',
+			Showinterpreter: 'Showinterpreter',
+			showDrop: 'showDrop',
 			showAdminPanelButton: 'showAdminPanelButton',
 		}),
 	},

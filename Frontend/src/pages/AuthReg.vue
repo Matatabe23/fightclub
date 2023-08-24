@@ -70,10 +70,8 @@ export default {
 			result.then(response => {
 				this.$store.commit("SET_USER_DATA", response);
 				// и обновляем доступы кнопок
-				this.showSummaryButton = this.$store.getters.showSummaryButton;
-				this.showAttendanceButton = this.$store.getters.showAttendanceButton;
-				this.showDropButton = this.$store.getters.showDropButton;
-				this.showQueueButton = this.$store.getters.showQueueButton;
+				this.Showinterpreter = this.$store.getters.Showinterpreter;
+				this.showDrop = this.$store.getters.showDrop;
 				this.showAdminPanelButton = this.$store.getters.showAdminPanelButton;
 
 				
