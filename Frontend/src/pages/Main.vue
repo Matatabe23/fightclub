@@ -2,6 +2,14 @@
 	<div class="Main">
 		<MySelect v-model="selectedSort" :options="sortOptions" />
 		<PostList :posts="selectedPosts" />
+
+		<div class="page__wrappper">
+			<div class="page" v-for="pageNumber in totalPages" :key="pageNumber"
+				:class="{ 'cuurent_page': page === pageNumber }" @click="changePage(pageNumber)">
+				{{ pageNumber }}
+			</div>
+		</div>
+
 	</div>
 </template>
 
@@ -13,6 +21,9 @@ export default {
 		return {
 			posts: [],
 			selectedSort: '',
+			page: 1,
+			limit: 5,
+			totalPages: 0,
 			sortOptions: [
 				{ value: 'title', name: 'По названию' },
 				{ value: 'body', name: 'По описанию' }
@@ -20,22 +31,54 @@ export default {
 		}
 	},
 	mounted() {
-		$host.get('api/posts/receive') // здесь указывается путь к API
-			.then(response => {
-				this.posts = response.data.reverse(); // здесь полученные данные помещаются в posts
-				console.log(this.posts)
-			})
-			.catch(error => {
-				console.log(error);
-			})
+		this.fetchPosts();
 	},
-	
 	computed: {
 		selectedPosts() {
 			return [...this.posts].sort((post1, post2) => post1[this.selectedSort]?.localeCompare(post2[this.selectedSort]))
 		}
 	},
+	methods: {
+		fetchPosts() {
+			$host.get('api/posts/receive', {
+				params: {
+					_page: this.page,
+					_limit: this.limit
+				}
+			})
+				.then(response => {
+					this.posts = response.data.reverse();
+					this.totalPages = Math.ceil(100 / this.limit);
+					
+				})
+				.catch(error => {
+					console.log(error);
+				});
+		},
+		changePage(pageNumber) {
+			this.page = pageNumber;
+			this.fetchPosts(); // Вызываем метод fetchPosts при изменении страницы
+		}
+	},
+
+
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.page__wrappper {
+	display: flex;
+	justify-content: center;
+}
+
+.page {
+	border: 1px solid black;
+	padding: 15px;
+	cursor: pointer;
+	color: white;
+}
+
+.cuurent_page {
+	border: 2px solid red;
+}
+</style>

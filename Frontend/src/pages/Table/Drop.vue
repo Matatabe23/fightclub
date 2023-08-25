@@ -95,7 +95,7 @@ export default {
   font-size: 15px;
   text-align: center;
   word-wrap: break-word;
-  overflow-x: auto; 
+  /* overflow-x: auto;  */
   margin: 30px 100px 0 100px;
 }
 
