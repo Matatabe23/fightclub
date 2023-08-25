@@ -49,7 +49,8 @@ export default {
 				.then(response => {
 					this.posts = response.data.reverse();
 					this.totalPages = Math.ceil(100 / this.limit);
-					
+					console.log(response.headers);
+
 				})
 				.catch(error => {
 					console.log(error);

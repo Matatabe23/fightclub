@@ -8,12 +8,12 @@
         <tr class="row caption">
 					<td class="none-cell" style="border-left: 4px solid black;"></td>
           <td class="none-cell" v-for="row in 3"></td>
-          <td class="data-cell" v-for="(cell) in deta" :key="cell">{{ cell }}</td>
+          <td class="data-cell" v-for="(cell) in deta" :key="cell" :class="{ 'empty-cell': cell === '' }">{{ cell }}</td>
 					<td class="data-cell" style="border-right: 4px solid black;"></td>
         </tr>
 
         <tr class="row caption" v-for="row in rows" :key="row">
-          <td class="cell" v-for="cell in row" :key="cell">{{ cell }}</td>
+          <td class="cell" v-for="cell in row" :key="cell" :class="{ 'empty-cell': cell === '' }">{{ cell }}</td>
         </tr>
       </table>
     </div>
@@ -93,6 +93,8 @@ export default {
 }
 .data-cell{
 	border-top: 4px solid black;
+	border-bottom: 4px solid black;
+	padding: 15px 0;
 }
 .data-cell:nth-child(2) {
   position: sticky;
@@ -113,5 +115,9 @@ export default {
 
 .caption td.none-cell {
   background-color: transparent;
+}
+
+.empty-cell {
+	padding: 0 30px;
 }
 </style>
