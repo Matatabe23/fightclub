@@ -78,7 +78,7 @@ export default {
 				this.$router.push('/Main');
 			}).catch(error => {
 				console.error(error);
-				alert(error.response.data.message);
+				alert(error.response.data.error);
 			});
 		},
 		Registration() {

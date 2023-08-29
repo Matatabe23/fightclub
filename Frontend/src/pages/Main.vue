@@ -4,17 +4,15 @@
 		<PostList :posts="selectedPosts" />
 
 		<div class="page__wrappper">
-			<div class="page" v-for="pageNumber in totalPages" :key="pageNumber"
-				:class="{ 'cuurent_page': page === pageNumber }" @click="changePage(pageNumber)">
-				{{ pageNumber }}
-			</div>
+			<button class="button-page" @click="changePage(page - 1)"><i class='bx bx-left-arrow-alt'></i></button>
+			<h1>{{ page }}</h1>
+			<button class="button-page" @click="changePage(page + 1)"><i class='bx bx-right-arrow-alt' ></i></button>
 		</div>
-
 	</div>
 </template>
 
 <script>
-import { $autHost, $host } from "@/Http/index"; // импортируем экземпляры axios для обращения к серверу
+import { $autHost, $host } from "@/Http/index";
 
 export default {
 	data() {
@@ -49,37 +47,32 @@ export default {
 				.then(response => {
 					this.posts = response.data.reverse();
 					this.totalPages = Math.ceil(100 / this.limit);
-					console.log(response.headers);
-
 				})
 				.catch(error => {
 					console.log(error);
 				});
 		},
 		changePage(pageNumber) {
-			this.page = pageNumber;
-			this.fetchPosts(); // Вызываем метод fetchPosts при изменении страницы
+			if (pageNumber >= 1 && pageNumber <= this.totalPages) {
+				this.page = pageNumber;
+				this.fetchPosts();
+			}
 		}
 	},
-
-
 }
 </script>
+
 
 <style scoped>
 .page__wrappper {
 	display: flex;
-	justify-content: center;
+	justify-content: space-around;
+	margin-bottom: 15px;
 }
-
-.page {
-	border: 1px solid black;
+.button-page{
+	border: none;
+	background-color: none;
 	padding: 15px;
 	cursor: pointer;
-	color: white;
-}
-
-.cuurent_page {
-	border: 2px solid red;
 }
 </style>

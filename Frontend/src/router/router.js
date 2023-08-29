@@ -91,6 +91,9 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token');
   const roles = Object.keys(to.meta);
+	if (token == undefined) {
+		localStorage.removeItem('token');
+	}
   if (to.path === '/') {
     next();
     return;

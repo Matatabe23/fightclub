@@ -30,10 +30,8 @@ class PostsController {
 			const endIndex = page * limit;
 
 			const posts = await Posts.findAll();
-			const totalPosts = posts.length;
 			const paginatedPosts = posts.slice(startIndex, endIndex);
 
-			res.set('x-total-counte', totalPosts); // Set the 'X-Total-Posts' header with the total number of posts
 			res.send(paginatedPosts);
 		} catch (error) {
 			console.error(error);
