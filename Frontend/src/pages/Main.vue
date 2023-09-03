@@ -1,18 +1,12 @@
 <template>
 	<div class="Main">
 		<MySelect v-model="selectedSort" :options="sortOptions" />
-		<PostList :posts="selectedPosts" />
-
-		<div class="page__wrappper">
-			<button class="button-page" @click="changePage(page - 1)"><i class='bx bx-left-arrow-alt'></i></button>
-			<h1>{{ page }}</h1>
-			<button class="button-page" @click="changePage(page + 1)"><i class='bx bx-right-arrow-alt' ></i></button>
-		</div>
+		<PostList :posts="selectedPosts"/>
 	</div>
 </template>
 
 <script>
-import { $autHost, $host } from "@/Http/index";
+import { Receive } from '@/Http/AdminAPI'
 
 export default {
 	data() {
@@ -29,37 +23,20 @@ export default {
 		}
 	},
 	mounted() {
-		this.fetchPosts();
+		Receive()
+			.then(response => {
+				this.posts = response.reverse();
+			})
+			.catch(error => {
+				console.log(error);
+			})
 	},
 	computed: {
 		selectedPosts() {
 			return [...this.posts].sort((post1, post2) => post1[this.selectedSort]?.localeCompare(post2[this.selectedSort]))
 		}
 	},
-	methods: {
-		fetchPosts() {
-			$host.get('api/posts/receive', {
-				params: {
-					_page: this.page,
-					_limit: this.limit
-				}
-			})
-				.then(response => {
-					this.posts = response.data.reverse();
-					this.totalPages = Math.ceil(100 / this.limit);
-				})
-				.catch(error => {
-					console.log(error);
-				});
-		},
-		changePage(pageNumber) {
-			if (pageNumber >= 1 && pageNumber <= this.totalPages) {
-				this.page = pageNumber;
-				this.fetchPosts();
-			}
-		}
-	},
-}
+	}
 </script>
 
 

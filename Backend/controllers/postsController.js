@@ -22,17 +22,9 @@ class PostsController {
 
 	async receive(req, res) {
 		try {
-			const { _page, _limit } = req.query;
-			const page = parseInt(_page) || 1;
-			const limit = parseInt(_limit) || 5;
-
-			const startIndex = (page - 1) * limit;
-			const endIndex = page * limit;
-
 			const posts = await Posts.findAll();
-			const paginatedPosts = posts.slice(startIndex, endIndex);
 
-			res.send(paginatedPosts);
+			res.send(posts);
 		} catch (error) {
 			console.error(error);
 			res.status(500).send('Server Error');

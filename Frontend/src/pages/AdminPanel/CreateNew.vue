@@ -1,5 +1,4 @@
 <template>
-	<AdminPanels></AdminPanels>
 	<div class="CreateNew">
 		<PostForm :post="post" @CreatePosts="createPost" />
 		<MySelect v-model="selectedSort" :options="sortOptions" />
@@ -36,7 +35,6 @@ export default {
 		//Получение всех постов
 		Receive()
 			.then(response => {
-				console.log(response)
 				this.posts = response.reverse();
 			})
 			.catch(error => {

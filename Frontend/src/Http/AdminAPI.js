@@ -14,7 +14,7 @@ export const DeletePosts = async (postId) =>{
 }
 
 //Получение всех постов
-export const Receive = async (postId) =>{
+export const Receive = async () =>{
 	const {data} = await $host.get('api/posts/receive') // отправляем POST-запрос с данными на URL-адрес
 	return data //Возвращаем результат функции
 }

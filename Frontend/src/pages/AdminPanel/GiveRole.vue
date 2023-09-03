@@ -1,5 +1,4 @@
 <template>
-	<AdminPanels></AdminPanels>
 		<RoleForm :GiveRole="GiveRole" @OnUPRole="UPRole"/>
 		<table class="table">
 			<thead>

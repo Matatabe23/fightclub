@@ -1,35 +1,59 @@
 <template>
 	<div class="NavBar" v-show="AuthCheck">
-		<a>
-			<img src="@/Image/FightClub_title.png" alt="Image alt text">
-		</a>
+		<!-- Новости -->
 		<ClassicButton @click="$router.push('/Main')">Новости</ClassicButton>
-		<ClassicButton class="dropdown">Таблицы
+
+		<!-- Зарплатная система -->
+		<ClassicButton class="dropdown">Зарплатная система FightClub
 			<div class="dropdown-content">
 				<DropButton @click="$router.push('/interpreter')" v-if="Showinterpreter">Посещаемость</DropButton>
 				<DropButton @click="$router.push('/Drop')" v-if="showDrop">Дроп</DropButton>
-				<DropButton @click="$router.push('/Main')">***</DropButton>
-				<DropButton @click="$router.push('/Main')">***</DropButton>
 			</div>
 		</ClassicButton>
-		<ClassicButton @click="$router.push('/Main')">Правила</ClassicButton>
-		<ClassicButton class="dropdown">Информация
+
+		<!-- кураторы классов -->
+		<ClassicButton class="dropdown">Кураторы классов
 			<div class="dropdown-content">
-				<DropButton>Дискорд</DropButton>
-				<DropButton>ТС</DropButton>
-				<DropButton>Основаня Информация</DropButton>
+				<DropButton @click="$router.push('/Main')">Хил</DropButton>
+				<DropButton @click="$router.push('/Main')">Танк</DropButton>
+				<DropButton @click="$router.push('/Main')">Маг</DropButton>
+				<DropButton @click="$router.push('/Main')">Милик</DropButton>
+				<DropButton @click="$router.push('/Main')">Лук</DropButton>
 			</div>
 		</ClassicButton>
 
-		<ClassicButton @click="$router.push('/CreateNew')" v-if="showAdminPanelButton">Админ Панель</ClassicButton>
+		<!-- Инструменты -->
+		<ClassicButton class="dropdown">Инструменты
+			<div class="dropdown-content">
+				<DropButton @click="$router.push('/Main')">Голосовалка</DropButton>
+				<DropButton @click="$router.push('/Main')">Ролл(Бросок кубиков)</DropButton>
+			</div>
+		</ClassicButton>
 
-		<div title="Текст всплывающей подсказки" style="float: right;">
-			<ClassicButton class="dropdown">{{ user }}
-				<div class="dropdown-content">
-					<DropButton @click="Exit">Выйти</DropButton>
-				</div>
-			</ClassicButton>
-		</div>
+		<!-- Полезные ссылки -->
+		<ClassicButton class="dropdown">Полезные ссылки
+			<div class="dropdown-content">
+				<DropButton @click="$router.push('/Main')">Правила</DropButton>
+				<DropButton @click="$router.push('/Main')">Жалобы</DropButton>
+				<DropButton @click="$router.push('/Main')">Заявка в PC</DropButton>
+			</div>
+		</ClassicButton>
+
+		<!-- админ панель -->
+		<ClassicButton class="dropdown" v-if="showAdminPanelButton">Админ Панель
+			<div class="dropdown-content">
+				<DropButton @click="$router.push('/CreateNew')">Создать новость</DropButton>
+				<DropButton @click="$router.push('/GiveRole')">Выдача ролей</DropButton>
+			</div>
+		</ClassicButton>
+
+		<!-- Информация об игроке -->
+		<ClassicButton class="dropdown">{{ $store.state.navbar.userData.name }}
+			<div class="dropdown-content">
+				<DropButton>Личный кабинет</DropButton>
+				<DropButton @click="Exit">Выйти</DropButton>
+			</div>
+		</ClassicButton>
 	</div>
 </template>
 
@@ -42,10 +66,9 @@ import { check } from '@/Http/UserAPI';
 
 export default {
 	name: 'NavBar',
-	data(){
-		return{
-			isPageRefreshed: false,
-			user: '',
+	data() {
+		return {
+
 		}
 	},
 	computed: {
@@ -61,18 +84,17 @@ export default {
 	mounted() {
 		const token = localStorage.getItem('token');
 		if (token) {
-			check(token).then((Name) => {
-				this.user = Name.name;
-				this.$store.commit('SET_USER_DATA', Name);
+			check(token).then((response) => {
+				this.$store.commit('SET_USER_DATA', response);
 			});
 		}
 	},
-	
+
 	methods: {
 		Exit() {
 			this.$router.push('/');
 			localStorage.removeItem('token');
-			this.$store.commit('SET_USER_DATA', null);
+			this.$store.commit('SET_USER_DATA', '');
 		},
 	},
 
@@ -87,18 +109,19 @@ export default {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin: 0 90px 0 40px;
+	margin: 3% 90px 3% 40px;
 }
 
 .NavBar img {
-	width: 50vh;
+	width: 30vh;
 }
 
 .dropdown-content {
 	position: absolute;
 	display: none;
 	min-width: 160px;
-	transform: translateX(-31%);
+	left: 50%;
+	transform: translateX(-50%);
 	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 	z-index: 1;
 	margin-top: 10px;
@@ -106,7 +129,12 @@ export default {
 	border-radius: 15px;
 }
 
+.dropdown {
+	position: relative;
+}
+
 .dropdown:hover .dropdown-content {
 	display: block;
+
 }
 </style>
