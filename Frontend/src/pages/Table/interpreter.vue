@@ -6,10 +6,22 @@
     <div class="comand">
       <table class="table">
         <tr class="row caption">
-					<td class="none-cell" style="border-left: 4px solid black;"></td>
-          <td class="none-cell" v-for="row in 3"></td>
-          <td class="data-cell" v-for="(cell) in deta" :key="cell" :class="{ 'empty-cell': cell === '' }">{{ cell }}</td>
-					<td class="data-cell" style="border-right: 4px solid black;"></td>
+					<td class="none-cell" style="border-left: 4px solid black; background-color: green;"></td>
+          <td class="none-cell" style="background-color: green;" v-for="row in 3"></td>
+          <td class="data-cell" style="background-color: green;" v-for="(cell) in deta" :key="cell" :class="{ 'empty-cell': cell === '' }">{{ cell }}</td>
+					<td class="data-cell" style="border-right: 4px solid black; background-color: green;"></td>
+        </tr>
+				<tr class="row caption">
+          <td class="cell" v-for="(cell) in boss" :key="cell" style="background-color: green;" :class="{ 'empty-cell': cell === '' }">{{ cell }}</td>
+        </tr>
+				<tr class="row caption">
+          <td class="cell" v-for="(cell) in percent" :key="cell" style="background-color: rgb(187, 137, 36);" :class="{ 'empty-cell': cell === '' }">{{ cell }}</td>
+        </tr>
+				<tr class="row caption">
+          <td class="cell" v-for="(cell) in numBoss" :key="cell" style="background-color: rgb(187, 137, 36);" :class="{ 'empty-cell': cell === '' }">{{ cell }}</td>
+        </tr>
+				<tr class="row caption">
+          <td class="cell" v-for="(cell) in online" :key="cell" style="background-color: rgb(187, 137, 36);" :class="{ 'empty-cell': cell === '' }">{{ cell }}</td>
         </tr>
 
         <tr class="row caption" v-for="row in rows" :key="row">
@@ -27,6 +39,10 @@ export default {
   data() {
     return {
       deta: [],
+			boss: [],
+			percent: [],
+			numBoss: [],
+			online: [],
       rows: [],
     };
   },
@@ -39,8 +55,12 @@ export default {
         }
       })
       .then(response => {
-        this.rows = response.data.slice(3);
         this.deta = response.data[1];
+				this.boss = response.data[3];
+				this.percent = response.data[4];
+				this.numBoss = response.data[5];
+				this.online = response.data[6];
+        this.rows = response.data.slice(7);
       })
       .catch(error => {
         console.log(error);
