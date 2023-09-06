@@ -198,6 +198,12 @@ export default {
 	color: white;
 }
 
+
+.auth-container:first-child {
+  animation: fadeIn 1s ease-in-out;
+}
+
+
 @media (max-width: 768px) {
 	.auth-container {
 		padding: 20px;

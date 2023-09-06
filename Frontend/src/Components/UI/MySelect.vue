@@ -39,4 +39,8 @@ export default {
 	width: 200px;
   height: 40px;
 }
+
+.MySelect:first-child {
+  animation: fadeIn 1s ease-in-out;
+}
 </style>

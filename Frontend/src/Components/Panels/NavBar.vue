@@ -137,4 +137,8 @@ export default {
 	display: block;
 
 }
+
+.NavBar:first-child {
+  animation: fadeIn 1s ease-in-out;
+}
 </style>

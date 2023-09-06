@@ -1,6 +1,6 @@
 <template>
 	<div class="app" @keydown="myFunction">
-		<TheLoadingComponent/>
+		<!-- <TheLoadingComponent/> -->
 		<NavBar/>
 		<router-view/>
 	</div>
@@ -23,5 +23,18 @@ body {
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-attachment: fixed;
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>

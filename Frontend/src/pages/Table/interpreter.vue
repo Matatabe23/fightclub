@@ -140,4 +140,6 @@ export default {
 .empty-cell {
 	padding: 0 30px;
 }
+
+
 </style>
