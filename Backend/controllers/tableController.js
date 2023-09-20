@@ -1,7 +1,7 @@
 const ApiError = require('../error/ApiError') // Подключение модуля для обработки ошибок API
 const bcrypt = require('bcrypt'); // Подключение модуля bcrypt для шифрования паролей
-const { json } = require('body-parser');
 const { google } = require('googleapis'); // Подключение модуля googleapis, содержащего Google API-клиент
+const GoogleTableAuth = require('../GoogleTable')
 
 class tableController {
 	
@@ -10,11 +10,8 @@ class tableController {
 		try {
 			const spreadsheetId = process.env.TABLE_ID;
 			const sheetName = 'Interpreter';
-			const auth = new google.auth.GoogleAuth({
-				keyFile: './other/keyfile.json',
-				scopes: ['https://www.googleapis.com/auth/spreadsheets']
-			});
-			const sheets = google.sheets({ version: 'v4', auth });
+			const sheets = GoogleTableAuth
+
 			sheets.spreadsheets.values.get({
 				spreadsheetId,
 				range: `${sheetName}!A:HR`,

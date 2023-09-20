@@ -1,6 +1,5 @@
 <template>
 	<div class="PostList">
-		<transition-group name="PostList-transition">
 			<div class="posts" v-for="post in posts" :key="post.id">
 				<div class="post-container">
 					<div><strong>Дата:</strong> {{ post.createdAt.replace(/[T|Z]/g, ' ').slice(0, -14) }}</div>
@@ -9,10 +8,9 @@
 					<div><strong>Автор:</strong> {{ post.ADnameName }}({{ post.ADnameRole }})</div>
 				</div>
 				<div class="posts-buttons" v-if="$route.path !== '/Main'">
-					<ClassicButton style="margin-right: 15px;" @click="$emit('onDeletePost', post.id)">Удалить</ClassicButton>
+					<ClassicButton style="margin-right: 15px;" @click="$emit('onDeletePost', post[0])">Удалить</ClassicButton>
 				</div>
 			</div>
-		</transition-group>
 	</div>
 </template>
 
@@ -53,24 +51,7 @@ export default {
 	margin-left: auto;
 	display: flex;
 }
-
-
-.PostList-transition-item {
-	display: inline-block;
-	margin-right: 10px;
-}
-
-.PostList-transition-enter-active,
-.PostList-transition-leave-active {
-	transition: all 1s ease;
-}
-
-.PostList-transition-enter-from,
-.PostList-transition-leave-to {
-	opacity: 0;
-	transform: translateX(130px);
-}
-.PostList-transition-move {
-  transition: transform 0.8s ease;
+.PostList:first-child{
+	animation: fadeIn 1s ease-in-out;
 }
 </style>

@@ -1,7 +1,6 @@
 <template>
 	<div class="Main">
-		<MySelect v-model="selectedSort" :options="sortOptions" />
-		<PostList :posts="selectedPosts"/>
+		<PostList :posts="posts"/>
 	</div>
 </template>
 
@@ -25,16 +24,11 @@ export default {
 	mounted() {
 		Receive()
 			.then(response => {
-				this.posts = response.reverse();
+				this.posts = response.slice(1).reverse();
 			})
 			.catch(error => {
 				console.log(error);
 			})
-	},
-	computed: {
-		selectedPosts() {
-			return [...this.posts].sort((post1, post2) => post1[this.selectedSort]?.localeCompare(post2[this.selectedSort]))
-		}
 	},
 	}
 </script>

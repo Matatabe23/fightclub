@@ -1,4 +1,5 @@
 const {Sequelize} = require('sequelize')
+const { google } = require('googleapis');
 
 module.exports = new Sequelize(
 	process.env.DB_NAME, //Название БД
@@ -10,3 +11,4 @@ module.exports = new Sequelize(
 		port: process.env.DB_PORT
 	}
 )
+

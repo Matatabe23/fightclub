@@ -9,7 +9,6 @@ module.exports = (role) => {
     }
      try {
       const token = req.headers.authorization.split(' ')[1]; // Получаем JWT-токен из заголовка Authorization запроса
-			console.log('wmnfew')
       if (!token) {
         return res.status(401).json({message: "Не авторизован"}); // Если токен не найден, отправляем ошибку авторизации
       }

@@ -1,9 +1,8 @@
 <template>
 	<div class="CreateNew">
 		<PostForm :post="post" @CreatePosts="createPost" />
-		<MySelect v-model="selectedSort" :options="sortOptions" />
 		<h1 style="text-align: center;">список новостей</h1>
-		<PostList :posts="selectedPosts" @onDeletePost="deletePost" />
+		<PostList :posts="posts" @onDeletePost="deletePost" />
 	</div>
 </template>
 
@@ -35,7 +34,7 @@ export default {
 		//Получение всех постов
 		Receive()
 			.then(response => {
-				this.posts = response.reverse();
+				this.posts = response;
 			})
 			.catch(error => {
 				console.log(error);
@@ -98,13 +97,6 @@ export default {
 				})
 		},
 	},
-
-
-	computed: {
-		selectedPosts() {
-			return [...this.posts].sort((post1, post2) => post1[this.selectedSort]?.localeCompare(post2[this.selectedSort]))
-		}
-	}
 }
 </script>
 

@@ -36,6 +36,8 @@ class UserController {
 	async login(req, res, next) {
 		const { email, password } = req.body // Получаем данные пользователя из запроса
 		const user = await User.findOne({ where: { email } }) // Проверяем, что пользователь с таким email зарегистрирован
+		const uuu = User.findOne()
+		console.log(uuu)
 		if (!user) { // Если пользователь не найден, возвращаем ошибку
 			return next(ApiError.internal('Пользователь не найден'))
 		}

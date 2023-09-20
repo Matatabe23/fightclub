@@ -1,48 +1,53 @@
-const ApiError = require('../error/ApiError')
-const bcrypt = require('bcrypt')
-const { Posts } = require('../models/models')
+const ApiError = require('../error/ApiError');
+const { Posts } = require('../models/models');
 
 class PostsController {
-	async push(req, res) {
-		try {
-			const { title, body, ADnameName, ADnameRole } = req.body;
-			const post = await Posts.create({
-				title,
-				body,
-				ADnameName,
-				ADnameRole
-			});
+  // Создание поста
+  async push(req, res) {
+    try {
+      const { title, body, ADnameName, ADnameRole } = req.body;
 
-			res.send(post);
-		} catch (error) {
-			console.error(error);
-			res.status(500).send('Server Error');
-		}
-	}
+      // Сохранение данных в базу данных
+      const newPost = await Posts.create({
+        title,
+        body,
+        ADnameName,
+        ADnameRole
+      });
 
-	async receive(req, res) {
-		try {
-			const posts = await Posts.findAll();
+      console.log('Данные сохранены в базу данных:');
+      res.send(newPost);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Server Error');
+    }
+  }
 
-			res.send(posts);
-		} catch (error) {
-			console.error(error);
-			res.status(500).send('Server Error');
-		}
-	}
+  // Получение всех постов
+  async receive(req, res) {
+    try {
+      const posts = await Posts.findAll();
+      res.send(posts);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Server Error');
+    }
+  }
 
+  // Удаление поста
+  async delete(req, res) {
+    try {
+      const { id } = req.body;
 
+      // Удаление поста из базы данных
+      await Posts.destroy({where: {id: id}});
 
-	async delete(req, res) {
-		try {
-			const { id } = req.body;
-			const post = await Posts.destroy({ where: { id } });
-			res.send('Post deleted successfully');
-		} catch (error) {
-			console.error(error);
-			res.status(500).send('Server Error');
-		}
-	}
+      res.send('Post deleted successfully');
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Server Error');
+    }
+  }
 }
 
 module.exports = new PostsController();
