@@ -28,3 +28,4 @@ const start = async() =>{
 }
 
 start() // Вызов функции для запуска приложения
+const UpdateData = require('./UpdateData')

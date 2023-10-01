@@ -8,14 +8,8 @@ class PostsController {
       const { title, body, ADnameName, ADnameRole } = req.body;
 
       // Сохранение данных в базу данных
-      const newPost = await Posts.create({
-        title,
-        body,
-        ADnameName,
-        ADnameRole
-      });
+      const newPost = await Posts.create({ title, body, ADnameName, ADnameRole});
 
-      console.log('Данные сохранены в базу данных:');
       res.send(newPost);
     } catch (error) {
       console.error(error);

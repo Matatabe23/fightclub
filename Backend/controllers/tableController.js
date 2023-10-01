@@ -1,5 +1,3 @@
-const ApiError = require('../error/ApiError') // Подключение модуля для обработки ошибок API
-const bcrypt = require('bcrypt'); // Подключение модуля bcrypt для шифрования паролей
 const { google } = require('googleapis'); // Подключение модуля googleapis, содержащего Google API-клиент
 const GoogleTableAuth = require('../GoogleTable')
 

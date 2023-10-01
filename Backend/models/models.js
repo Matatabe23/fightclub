@@ -11,7 +11,7 @@ const User = sequelize.define('user', {
 	},
 	name: { type: DataTypes.STRING },
 	password: { type: DataTypes.STRING },
-	role: { type: DataTypes.STRING, defaultValue: "USER" }
+	role: { type: DataTypes.STRING, defaultValue: "USER" },
 })
 
 const Posts = sequelize.define('posts', {
